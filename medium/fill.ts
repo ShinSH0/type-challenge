@@ -23,7 +23,8 @@
 type Tuple<Length extends number, T extends any[] = []> = 
             T extends { length : Length } ? T : Tuple<Length, [...T, any]>;
 
-type AddOne<L extends number> = [...Tuple<L>, any]['length']
+type AddOne<L extends number> = [...Tuple<L>, any]['length'] extends number ? 
+        [...Tuple<L>, any]['length'] : never;
 
 type Range<Start extends number, End extends number, Arr extends number[] = []> = 
         Start extends End ? Arr : Range<AddOne<Start>, End, [...Arr, Start]>
