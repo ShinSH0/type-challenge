@@ -20,13 +20,12 @@
 /* _____________ Your Code Here _____________ */
 
 type DropString<S extends string, R, Result extends string = ''> = S extends `${infer F}${infer Rest}` ?
-        F extends Intersection<R> ? 
+        F extends Union<R> ? 
             DropString<Rest, R, Result> : 
             DropString<Rest, R, `${Result}${F}`>
         : Result;
 
-type Intersection<S> = S extends `${infer F}${infer R}` ? F | Intersection<R> : never;
-// type Intersection<S> = S extends `${infer F}${infer R}` ? R extends '' ? never : F | Intersection<R> : never;
+type Union<S> = S extends `${infer F}${infer R}` ? F | Union<R> : never;
 
 
 /* _____________ Test Cases _____________ */
